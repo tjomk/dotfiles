@@ -1,15 +1,9 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+eval "$(starship init zsh)"
+autoload -U promptinit; promptinit
+prompt pure
 
-export GOPATH=~/Workspace/Go
-
-# Path to your oh-my-zsh installation.
 export ZSH="/Users/artjom/.oh-my-zsh"
-export WORKON_HOME="/Users/artjom/Workspace/Envs"
+export ZSH_COLORIZE_STYLE="colorful"
 
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
@@ -17,31 +11,42 @@ if type brew &>/dev/null; then
   compinit
 fi
 
-
-ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(
+  colorize
+  eza
   git
-  virtualenvwrapper
+  gpg-agent
+  keychain
+  ngrok
+  nvm
+  sublime
   z
   zsh-autosuggestions
 )
 
+zstyle :omz:plugins:keychain agents ssh,gpg
+zstyle :omz:plugins:keychain identities id_rsa 2D5E6F5DA8A297604917ADE7FFD5CFFEB3BFFC8A
+
 source $ZSH/oh-my-zsh.sh
-source ~/.aws-shipit
 
 alias v="vim -b"
 alias vi="vim -b"
 alias gb="git branch"
 alias gd="git diff"
 alias gs="git status"
-alias ll="exa -l --icons"
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH=$HOME/bin:$HOME/Workspace/Go/bin:/usr/local/bin:/usr/local/sbin:$PYENV_ROOT/bin:$PATH
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
+source $(brew --prefix nvm)/nvm.sh
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export PYENV_ROOT=$HOME/.pyenv
+export PATH="/Users/artjom/.local/bin:$PATH"
+
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/artjom/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+
+# Added by Antigravity
+export PATH="/Users/artjom/.antigravity/antigravity/bin:$PATH"
