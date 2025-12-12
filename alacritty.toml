@@ -1,0 +1,83 @@
+# Alacritty - TOML configuration file format.
+
+# Import additional configuration files.
+# Imports are loaded in order, skipping all missing files, with the importing file being loaded last. [cite: 3]
+# If a field is already present in a previous import, it will be replaced. [cite: 4]
+# All imports must either be absolute paths starting with /, or paths relative to the user's home directory starting with ~/. [cite: 5]
+[general]
+import = ["~/.config/alacritty/catppuccin_mocha.toml"]
+
+# Live config reload (changes require restart). [cite: 7]
+live_config_reload = true
+
+# Offer IPC using alacritty msg (unix only). [cite: 8]
+ipc_socket = true
+
+# SHELL
+#[shell]
+#program = "/usr/bin/zsh"
+#args = ["-l"]
+
+# WINDOW
+[window]
+startup_mode = "Windowed"
+title = "Alacritty"
+dynamic_title = true
+decorations_theme_variant = "None"
+decorations = "Full"
+opacity = 0.9
+blur = true
+dimensions = { columns = 120, lines = 30 }
+padding = { x = 10, y = 10 }
+dynamic_padding = true
+
+# SCROLLING
+[scrolling]
+history = 10000 # Maximum number of lines in the scrollback buffer. [cite: 41]
+multiplier = 3 # Number of line scrolled for every input scroll increment. [cite: 43]
+
+# FONT
+[font]
+size = 14.0 # Font size in points. [cite: 48]
+builtin_box_drawing = true
+
+[font.normal]
+family = "JetBrains Mono"
+style = "Regular"
+
+[font.bold]
+family = "JetBrains Mono"
+style = "Bold"
+
+[font.italic]
+family = "JetBrains Mono"
+style = "Italic"
+
+[font.bold_italic]
+family = "JetBrains Mono"
+style = "Bold Italic"
+
+
+# COLORS
+# Colors are specified using their hexadecimal values with a # prefix: #RRGGBB. [cite: 54]
+[colors.primary]
+# These will be overridden by the imported catppuccin_mocha.toml
+# foreground = "#d8d8d8"
+# background = "#181818"
+
+# SELECTION
+#[selection]
+#semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+#save_to_clipboard = true # When set to true, selected text will be copied to the primary clipboard. [cite: 90]
+
+# CURSOR
+[cursor]
+style = { shape = "Block", blinking = "Off" }
+vi_mode_style = "Beam"
+blink_interval = 500
+unfocused_hollow = true
+thickness = 0.15
+
+# MOUSE
+[mouse]
+hide_when_typing = false

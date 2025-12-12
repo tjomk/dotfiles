@@ -1,0 +1,6 @@
+[user]
+	name = Artjom Vassiljev
+[commit]
+	gpgsign = true
+[core]
+	excludesfile = /Users/artjom/.gitignore
