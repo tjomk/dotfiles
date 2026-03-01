@@ -9,6 +9,7 @@ eza
 fzf
 gettext
 hugo
+leader-key
 icu4c@77
 libassuan
 libevent
